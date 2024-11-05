@@ -1,108 +1,51 @@
-/* Base styles for the body */
-body {
-    font-family: Arial, sans-serif; /* Original font */
-    background-color: #005d4d; /* Dark green background */
-    color: #333; /* Default text color */
-    margin: 0;
-    padding: 0;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wavelength, Speed, and Frequency Practice Tool</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Ascension Catholic School</h2>
+        <h1>Wavelength, Speed, and Frequency Practice Tool</h1>
 
-/* Style for main container */
-.container {
-    width: 50%;
-    margin: 50px auto; /* Position it lower on the page */
-    padding: 20px;
-    background-color: white;
-    border: 1px solid #ddd;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    position: relative;
-    border-radius: 10px; /* Rounded corners */
-}
+        <p>Instructions: Round all answers to the nearest hundredth.</p>
 
-/* Header for school name */
-.container h2 {
-    color: #fcb900; /* Yellow for the school name */
-    margin: 0;
-}
+        <button onclick="generateProblem()">Generate New Problem</button>
+        
+        <div id="problem-display">
+            <p id="problem-statement">Click "Generate New Problem" to start.</p>
+        </div>
 
-/* Header for the main title */
-.container h1 {
-    color: #005d4d; /* Use white for the title for strong contrast */
-    font-size: 2.5em; /* Increase font size */
-    font-weight: bold; /* Make title bold */
-    text-transform: uppercase; /* Make the title uppercase for emphasis */
-    letter-spacing: 1px; /* Add spacing between letters */
-    margin-bottom: 20px; /* Add some space below the title */
-}
+        <div>
+            <input type="text" id="answer-input" placeholder="Enter your answer"> <!-- Removed inline style -->
+            <span id="unit-label"></span>
+        </div>
 
-/* Button styles */
-button {
-    background-color: #00d084; /* Vivid green-cyan for buttons */
-    color: white; /* Button text color */
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-size: 1em;
-    margin: 10px 0;
-    border-radius: 5px; /* Rounded corners for buttons */
-}
+        <button onclick="checkAnswer()">Submit Answer</button>
 
-button:hover {
-    background-color: #7bdcb5; /* Change color on hover */
-}
+        <!-- "Need Help?" Button and Solution Box -->
+        <button id="helpBtn" onclick="showSolutionWalkthrough()">Need Help?</button>
+        <div id="solutionBox" style="display: none;">
+            <p id="solutionText"></p>
+        </div>
 
-/* Style for the problem statement and input */
-#problem-statement {
-    font-size: 1.5em; /* Increased font size for readability */
-    margin-bottom: 10px; /* Space below problem statement */
-}
+        <div id="feedback"></div>
+ 
+        <!-- Tally bar to display correct and incorrect answers -->
+        <div id="tally-bar" style="margin-top: 10px;">
+            <span id="correct-tally">✅: 0</span> &nbsp;
+            <span id="incorrect-tally">❌: 0</span>
+        </div>
 
-#answer-input {
-    font-size: 1.2em; /* Increased font size for input box */
-    padding: 10px; /* Add padding for better usability */
-    width: 200px; /* Set a fixed width for the input box */
-    margin: 0 auto; /* Center the input box */
-}
+        <footer>
+            <p>&copy; MrsWelzenbach</p>
+            <p>2024-2025</p> <!-- Merged the footer content -->
+        </footer>
+    </div>
 
-/* Center the footer within the container and add some spacing */
-footer {
-    margin-top: 20px;
-    font-size: 0.8em;
-    color: #666;
-    text-align: center;
-}
-
-/* Style for the "Need Help?" button */
-#helpBtn {
-    background-color: #00d084; /* Vivid green */
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    margin: 10px 0;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-#helpBtn:hover {
-    background-color: #7bdcb5; /* Light green on hover */
-}
-
-/* Style for solution box */
-#solutionBox {
-    margin-top: 15px;
-    padding: 15px;
-    background-color: #f0f0f0;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    color: #333;
-    text-align: left;
-}
-
-/* Center the main footer within the container and add some spacing */
-#main-footer {
-    margin-top: 20px;
-    font-size: 0.8em;
-    color: #666;
-    text-align: center;
-}
+    <script src="script.js"></script>
+</body>
+</html>
