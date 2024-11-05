@@ -13,7 +13,6 @@ function generateProblem() {
     let correctAnswer = 0;
     let units = '';
 
-    // Select the correct answer and set problem statement based on type
     if (problemType === 1) {
         problemStatement = `A wave travels with a frequency of ${frequency} Hz and a wavelength of ${wavelength} meters. Calculate the speed of the wave.`;
         correctAnswer = speed;
@@ -28,20 +27,16 @@ function generateProblem() {
         units = "Hz";
     }
 
-    // Update the DOM with the problem and units
     document.getElementById("problem-statement").innerText = problemStatement;
     document.getElementById("feedback").innerText = '';
     document.getElementById("answer-input").value = '';
     document.getElementById("unit-label").innerText = units;
-
-    // Hide the solution box when a new problem is generated
     document.getElementById("solutionBox").style.display = "none";
 
-    // Store correct answer and units in data attributes
     const answerInput = document.getElementById("answer-input");
     answerInput.dataset.correctAnswer = correctAnswer;
     answerInput.dataset.units = units;
-    answerInput.dataset.problemType = problemType;  // Track problem type
+    answerInput.dataset.problemType = problemType;
     answerInput.dataset.wavelength = wavelength;
     answerInput.dataset.frequency = frequency;
     answerInput.dataset.speed = speed;
@@ -53,27 +48,23 @@ function checkAnswer() {
     const correctAnswer = parseFloat(document.getElementById("answer-input").dataset.correctAnswer);
     const units = document.getElementById("answer-input").dataset.units;
 
-    // Round both user answer and correct answer to two decimal places for comparison
     const roundedUserAnswer = roundToHundredth(userAnswer);
     const roundedCorrectAnswer = roundToHundredth(correctAnswer);
 
-    // Verify if the rounded answers match
     const isCorrect = roundedUserAnswer === roundedCorrectAnswer;
 
     if (isCorrect) {
         document.getElementById("feedback").innerText = `Correct! The answer is ${correctAnswer.toFixed(2)} ${units}.`;
         document.getElementById("feedback").style.color = "green";
-        correctCount++; // Increment correct count
+        correctCount++;
     } else {
         document.getElementById("feedback").innerText = `Incorrect. Please try again!`;
         document.getElementById("feedback").style.color = "red";
-        incorrectCount++; // Increment incorrect count
+        incorrectCount++;
     }
 
-    // Update the tally bar
     updateTally();
 
-    // Check if the correct count reaches 10
     if (correctCount === 10) {
         showSubmissionForm();
     }
@@ -89,9 +80,9 @@ function showSubmissionForm() {
             <label for="classHour">Hour:</label>
             <select id="classHour" required>
                 <option value="">Select Hour</option>
-                <option value="1">4th</option>
-                <option value="2">5th</option>
-                <option value="3">7th</option>
+                <option value="4th">1</option>
+                <option value="5th">2</option>
+                <option value="7th">3</option>
             </select>
             <button onclick="submitForm()">Submit</button>
             <button onclick="closeSubmissionForm()">Cancel</button>
@@ -102,7 +93,7 @@ function showSubmissionForm() {
 
 // Function to close the submission form
 function closeSubmissionForm() {
-    document.getElementById("feedback").innerText = ''; // Clear feedback
+    document.getElementById("feedback").innerText = '';
 }
 
 // Function to submit the form data to Google Sheets
@@ -110,10 +101,8 @@ function submitForm() {
     const name = document.getElementById("name").value;
     const classHour = document.getElementById("classHour").value;
 
-    // Send data to Google Sheets
     sendDataToGoogleSheet(name, classHour);
 
-    // Reset the counters and feedback
     correctCount = 0;
     incorrectCount = 0;
     updateTally();
@@ -122,10 +111,10 @@ function submitForm() {
 
 // Function to send data to Google Sheets
 function sendDataToGoogleSheet(name, classHour) {
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbxf61h0FNlPnNerIA76FquCVFV-c88A736lgXTbw-kEHrgYvKpiwSebCEQysnHvjqF9/exec'; // Replace with your Google Script URL
+    const scriptURL = 'https://script.google.com/macros/s/AKfycby_JP5OxqR_zmQrtgE3t2glH95Dc0rUtgzc25d7TQgXEUWOzqCPyxiZAaB9BZdAJhAw/exec';
     const data = new FormData();
-    data.append('entry.934309979', name); // Entry ID for Name
-    data.append('entry.1435057847', classHour); // Entry ID for Hour
+    data.append('name', name);
+    data.append('classHour', classHour);
 
     fetch(scriptURL, {
         method: 'POST',
