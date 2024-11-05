@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wavelength, Speed, and Frequency Practice Tool</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Ascension Catholic School</h2> <!-- New header -->
+        <h1>Wavelength, Speed, and Frequency Practice Tool</h1>
+        
+        <p>Instructions: Round all answers to the nearest hundredth.</p>
+        
+        <button onclick="generateProblem()">Generate New Problem</button>
+        
+        <div id="problem-display">
+            <p id="problem-statement">Click "Generate New Problem" to start.</p>
+        </div>
+
+        <div>
+            <input type="text" id="answer-input" placeholder="Enter your answer">
+            <span id="unit-label"></span> <!-- Unit label for correct units -->
+        </div>
+
+        <button onclick="checkAnswer()">Submit Answer</button>
+
+        <div id="feedback"></div>
+        
+        <!-- Add copyright notice within the container to keep it at the bottom -->
+        <footer>
+            <p>&copy; MrsWelzenbach</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
