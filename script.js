@@ -30,6 +30,9 @@ function generateProblem() {
     document.getElementById("answer-input").value = '';
     document.getElementById("unit-label").innerText = units;
 
+        // Hide the solution box when a new problem is generated
+    document.getElementById("solutionBox").style.display = "none";
+    
     // Store correct answer and units in data attributes
     const answerInput = document.getElementById("answer-input");
     answerInput.dataset.correctAnswer = correctAnswer;
