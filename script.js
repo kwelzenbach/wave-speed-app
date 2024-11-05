@@ -1,3 +1,7 @@
+// Initialize correct and incorrect counters
+let correctCount = 0;
+let incorrectCount = 0;
+
 // Function to generate random values and set up the problem with a word problem format
 function generateProblem() {
     const problemType = Math.floor(Math.random() * 3) + 1;
@@ -30,9 +34,9 @@ function generateProblem() {
     document.getElementById("answer-input").value = '';
     document.getElementById("unit-label").innerText = units;
 
-        // Hide the solution box when a new problem is generated
+    // Hide the solution box when a new problem is generated
     document.getElementById("solutionBox").style.display = "none";
-    
+
     // Store correct answer and units in data attributes
     const answerInput = document.getElementById("answer-input");
     answerInput.dataset.correctAnswer = correctAnswer;
@@ -59,10 +63,21 @@ function checkAnswer() {
     if (isCorrect) {
         document.getElementById("feedback").innerText = `Correct! The answer is ${correctAnswer.toFixed(2)} ${units}.`;
         document.getElementById("feedback").style.color = "green";
+        correctCount++; // Increment correct count
     } else {
         document.getElementById("feedback").innerText = `Incorrect. Please try again!`;
         document.getElementById("feedback").style.color = "red";
+        incorrectCount++; // Increment incorrect count
     }
+
+    // Update the tally bar
+    updateTally();
+}
+
+// Function to update the tally bar display
+function updateTally() {
+    document.getElementById("correct-tally").innerText = `✅: ${correctCount}`;
+    document.getElementById("incorrect-tally").innerText = `❌: ${incorrectCount}`;
 }
 
 // Solution walkthrough function
