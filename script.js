@@ -73,16 +73,13 @@ function showSolutionWalkthrough() {
 
     if (problemType === 1) {
         solutionText = `To find the speed, use the formula: Speed = Wavelength × Frequency.
-        Substitute the values: Speed = ${wavelength} m × ${frequency} Hz.
-        Solution: Speed = ${speed} m/s.`;
+        Substitute the values: Speed = ${wavelength} m × ${frequency} Hz.`;
     } else if (problemType === 2) {
         solutionText = `To find the wavelength, use the formula: Wavelength = Speed ÷ Frequency.
-        Substitute the values: Wavelength = ${speed} m/s ÷ ${frequency} Hz.
-        Solution: Wavelength = ${wavelength} meters.`;
+        Substitute the values: Wavelength = ${speed} m/s ÷ ${frequency} Hz.`;
     } else {
         solutionText = `To find the frequency, use the formula: Frequency = Speed ÷ Wavelength.
-        Substitute the values: Frequency = ${speed} m/s ÷ ${wavelength} m.
-        Solution: Frequency = ${frequency} Hz.`;
+        Substitute the values: Frequency = ${speed} m/s ÷ ${wavelength} m.`;
     }
 
     document.getElementById("solutionText").innerText = solutionText;
