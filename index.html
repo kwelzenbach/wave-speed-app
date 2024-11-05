@@ -20,13 +20,12 @@
         </div>
 
         <div>
-            <input type="text" id="answer-input" placeholder="Enter your answer"> <!-- Removed inline style -->
+            <input type="text" id="answer-input" placeholder="Enter your answer">
             <span id="unit-label"></span>
         </div>
 
         <button onclick="checkAnswer()">Submit Answer</button>
 
-        <!-- "Need Help?" Button and Solution Box -->
         <button id="helpBtn" onclick="showSolutionWalkthrough()">Need Help?</button>
         <div id="solutionBox" style="display: none;">
             <p id="solutionText"></p>
@@ -34,7 +33,6 @@
 
         <div id="feedback"></div>
  
-        <!-- Tally bar to display correct and incorrect answers -->
         <div id="tally-bar" style="margin-top: 10px;">
             <span id="correct-tally">✅: 0</span> &nbsp;
             <span id="incorrect-tally">❌: 0</span>
@@ -42,10 +40,13 @@
 
         <footer>
             <p>&copy; MrsWelzenbach</p>
-            <p>2024-2025</p> <!-- Merged the footer content -->
         </footer>
     </div>
 
+    <footer id="main-footer">
+        <p>2024-2025</p>
+    </footer>
+    
     <script src="script.js"></script>
 </body>
 </html>
