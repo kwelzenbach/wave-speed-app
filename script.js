@@ -72,6 +72,75 @@ function checkAnswer() {
 
     // Update the tally bar
     updateTally();
+
+    // Check if the correct count reaches 10
+    if (correctCount === 10) {
+        showSubmissionForm();
+    }
+}
+
+// Function to show the submission form
+function showSubmissionForm() {
+    const formHtml = `
+        <div id="submissionForm">
+            <h3>Submit Your Work</h3>
+            <label for="name">Name:</label>
+            <input type="text" id="name" placeholder="First and Last Name" required>
+            <label for="classHour">Hour:</label>
+            <select id="classHour" required>
+                <option value="">Select Hour</option>
+                <option value="4th">1</option>
+                <option value="5th">2</option>
+                <option value="7th">3</option>
+            </select>
+            <button onclick="submitForm()">Submit</button>
+            <button onclick="closeSubmissionForm()">Cancel</button>
+        </div>
+    `;
+    document.getElementById("feedback").innerHTML = formHtml;
+}
+
+// Function to close the submission form
+function closeSubmissionForm() {
+    document.getElementById("feedback").innerText = ''; // Clear feedback
+}
+
+// Function to submit the form data to Google Sheets
+function submitForm() {
+    const name = document.getElementById("name").value;
+    const classHour = document.getElementById("classHour").value;
+
+    // Send data to Google Sheets
+    sendDataToGoogleSheet(name, classHour);
+
+    // Reset the counters and feedback
+    correctCount = 0;
+    incorrectCount = 0;
+    updateTally();
+    closeSubmissionForm();
+}
+
+// Function to send data to Google Sheets
+function sendDataToGoogleSheet(name, classHour) {
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxf61h0FNlPnNerIA76FquCVFV-c88A736lgXTbw-kEHrgYvKpiwSebCEQysnHvjqF9/exec'; // Replace with your Google Script URL
+    const data = new FormData();
+    data.append('entry.934309979', name); // Entry ID for Name
+    data.append('entry.1435057847', classHour); // Entry ID for Hour
+
+    fetch(scriptURL, {
+        method: 'POST',
+        body: data
+    })
+    .then(response => {
+        if (response.ok) {
+            alert('Submission successful! Thank you for submitting your work.');
+        } else {
+            alert('There was a problem with the submission. Please try again.');
+        }
+    })
+    .catch(error => {
+        alert('Error: ' + error.message);
+    });
 }
 
 // Function to update the tally bar display
