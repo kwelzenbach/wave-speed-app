@@ -1,6 +1,6 @@
 /* Base styles for the body */
 body {
-    font-family: Arial, sans-serif;
+    font-family: Arial, sans-serif; /* Original font */
     background-color: #005d4d; /* Dark green background */
     color: #333; /* Default text color */
     margin: 0;
@@ -52,8 +52,55 @@ button:hover {
     background-color: #7bdcb5; /* Change color on hover */
 }
 
+/* Style for the problem statement and input */
+#problem-statement {
+    font-size: 1.5em; /* Increased font size for readability */
+    margin-bottom: 10px; /* Space below problem statement */
+}
+
+#answer-input {
+    font-size: 1.2em; /* Increased font size for input box */
+    padding: 10px; /* Add padding for better usability */
+    width: 200px; /* Set a fixed width for the input box */
+    margin: 0 auto; /* Center the input box */
+}
+
 /* Center the footer within the container and add some spacing */
 footer {
+    margin-top: 20px;
+    font-size: 0.8em;
+    color: #666;
+    text-align: center;
+}
+
+/* Style for the "Need Help?" button */
+#helpBtn {
+    background-color: #00d084; /* Vivid green */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#helpBtn:hover {
+    background-color: #7bdcb5; /* Light green on hover */
+}
+
+/* Style for solution box */
+#solutionBox {
+    margin-top: 15px;
+    padding: 15px;
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    color: #333;
+    text-align: left;
+}
+
+/* Center the main footer within the container and add some spacing */
+#main-footer {
     margin-top: 20px;
     font-size: 0.8em;
     color: #666;
