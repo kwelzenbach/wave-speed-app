@@ -8,11 +8,11 @@
 </head>
 <body>
     <div class="container">
-        <h2>Ascension Catholic School</h2> <!-- New header -->
+        <h2>Ascension Catholic School</h2>
         <h1>Wavelength, Speed, and Frequency Practice Tool</h1>
-        
+
         <p>Instructions: Round all answers to the nearest hundredth.</p>
-        
+
         <button onclick="generateProblem()">Generate New Problem</button>
         
         <div id="problem-display">
@@ -20,12 +20,12 @@
         </div>
 
         <div>
-            <input type="text" id="answer-input" placeholder="Enter your answer">
-            <span id="unit-label"></span> <!-- Unit label for correct units -->
+            <input type="text" id="answer-input" placeholder="Enter your answer"> <!-- Removed inline style -->
+            <span id="unit-label"></span>
         </div>
 
         <button onclick="checkAnswer()">Submit Answer</button>
-        
+
         <!-- "Need Help?" Button and Solution Box -->
         <button id="helpBtn" onclick="showSolutionWalkthrough()">Need Help?</button>
         <div id="solutionBox" style="display: none;">
@@ -33,17 +33,19 @@
         </div>
 
         <div id="feedback"></div>
-        
-        <!-- Add copyright notice within the container to keep it at the bottom -->
+ 
+        <!-- Tally bar to display correct and incorrect answers -->
+        <div id="tally-bar" style="margin-top: 10px;">
+            <span id="correct-tally">✅: 0</span> &nbsp;
+            <span id="incorrect-tally">❌: 0</span>
+        </div>
+
         <footer>
             <p>&copy; MrsWelzenbach</p>
+            <p>2024-2025</p> <!-- Merged the footer content -->
         </footer>
     </div>
 
-    <footer id="main-footer">
-        <p>Some footer text here.</p>
-    </footer>
-
-    <script src="script.js"></script> <!-- Ensure your JavaScript file is correctly linked -->
+    <script src="script.js"></script>
 </body>
 </html>
