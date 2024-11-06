@@ -80,9 +80,9 @@ function showSubmissionForm() {
             <label for="classHour">Hour:</label>
             <select id="classHour" required>
                 <option value="">Select Hour</option>
-                <option value="1">4th</option>
-                <option value="2">5th</option>
-                <option value="3">7th</option>
+                <option value="4th">4th</option>
+                <option value="5th">5th</option>
+                <option value="7th">7th</option>
             </select>
             <button onclick="submitForm()">Submit</button>
             <button onclick="closeSubmissionForm()">Cancel</button>
