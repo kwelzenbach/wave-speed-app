@@ -37,6 +37,10 @@ function generateProblem() {
     const answerInput = document.getElementById("answer-input");
     answerInput.dataset.correctAnswer = correctAnswer;
     answerInput.dataset.units = units;
+    answerInput.dataset.problemType = problemType;
+    answerInput.dataset.wavelength = wavelength;
+    answerInput.dataset.frequency = frequency;
+    answerInput.dataset.speed = speed;
 
     // Reset answer status and focus cursor
     isAnsweredCorrectly = false;
@@ -72,75 +76,7 @@ function checkAnswer() {
     }
 }
 
-// Function to show the submission form
-function showSubmissionForm() {
-    const formHtml = `
-        <div id="submissionForm">
-            <h3>Submit Your Work</h3>
-            <label for="name">Name:</label>
-            <input type="text" id="name" placeholder="First and Last Name" required>
-            <label for="classHour">Hour:</label>
-            <select id="classHour" required>
-                <option value="">Select Hour</option>
-                <option value="4th">4th</option>
-                <option value="5th">5th</option>
-                <option value="7th">7th</option>
-            </select>
-            <button onclick="submitForm()">Submit</button>
-            <button onclick="closeSubmissionForm()">Cancel</button>
-        </div>
-    `;
-    document.getElementById("feedback").innerHTML = formHtml;
-}
-
-// Function to close the submission form
-function closeSubmissionForm() {
-    document.getElementById("feedback").innerText = '';
-}
-
-// Function to submit the form data to Google Sheets
-function submitForm() {
-    const name = document.getElementById("name").value;
-    const classHour = document.getElementById("classHour").value;
-
-    sendDataToGoogleSheet(name, classHour);
-
-    correctCount = 0;
-    incorrectCount = 0;
-    updateTally();
-    closeSubmissionForm();
-}
-
-// Function to send data to Google Sheets
-function sendDataToGoogleSheet(name, classHour) {
-    const scriptURL = 'https://script.google.com/macros/s/AKfycby_JP5OxqR_zmQrtgE3t2glH95Dc0rUtgzc25d7TQgXEUWOzqCPyxiZAaB9BZdAJhAw/exec';
-    const data = new FormData();
-    data.append('name', name);
-    data.append('classHour', classHour);
-
-    fetch(scriptURL, {
-        method: 'POST',
-        body: data
-    })
-    .then(response => {
-        if (response.ok) {
-            alert('Submission successful! Thank you for submitting your work.');
-        } else {
-            alert('There was a problem with the submission. Please try again.');
-        }
-    })
-    .catch(error => {
-        alert('Error: ' + error.message);
-    });
-}
-
-// Function to update the tally bar display
-function updateTally() {
-    document.getElementById("correct-tally").innerText = `✅: ${correctCount}`;
-    document.getElementById("incorrect-tally").innerText = `❌: ${incorrectCount}`;
-}
-
-// Solution walkthrough function
+// Function to show the solution walkthrough
 function showSolutionWalkthrough() {
     const answerInput = document.getElementById("answer-input");
     const problemType = parseInt(answerInput.dataset.problemType);
@@ -155,7 +91,7 @@ function showSolutionWalkthrough() {
     } else if (problemType === 2) {
         solutionText = `To find the wavelength, use the formula: Wavelength = Speed ÷ Frequency.
         Substitute the values: Wavelength = ${speed} m/s ÷ ${frequency} Hz.`;
-    } else {
+    } else if (problemType === 3) {
         solutionText = `To find the frequency, use the formula: Frequency = Speed ÷ Wavelength.
         Substitute the values: Frequency = ${speed} m/s ÷ ${wavelength} m.`;
     }
