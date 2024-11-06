@@ -1,8 +1,9 @@
 // Initialize correct and incorrect counters
 let correctCount = 0;
 let incorrectCount = 0;
+let isAnsweredCorrectly = false; // Track if a correct answer has been counted
 
-// Function to generate random values and set up the problem with a word problem format
+// Function to generate a new problem
 function generateProblem() {
     const problemType = Math.floor(Math.random() * 3) + 1;
     const wavelength = roundToHundredth(Math.random() * 100);
@@ -36,10 +37,10 @@ function generateProblem() {
     const answerInput = document.getElementById("answer-input");
     answerInput.dataset.correctAnswer = correctAnswer;
     answerInput.dataset.units = units;
-    answerInput.dataset.problemType = problemType;
-    answerInput.dataset.wavelength = wavelength;
-    answerInput.dataset.frequency = frequency;
-    answerInput.dataset.speed = speed;
+
+    // Reset answer status and focus cursor
+    isAnsweredCorrectly = false;
+    answerInput.focus(); // Set focus on the answer box for user convenience
 }
 
 // Function to check if the answer is correct
@@ -53,11 +54,12 @@ function checkAnswer() {
 
     const isCorrect = roundedUserAnswer === roundedCorrectAnswer;
 
-    if (isCorrect) {
+    if (isCorrect && !isAnsweredCorrectly) {
         document.getElementById("feedback").innerText = `Correct! The answer is ${correctAnswer.toFixed(2)} ${units}.`;
         document.getElementById("feedback").style.color = "green";
         correctCount++;
-    } else {
+        isAnsweredCorrectly = true; // Mark as answered correctly
+    } else if (!isCorrect) {
         document.getElementById("feedback").innerText = `Incorrect. Please try again!`;
         document.getElementById("feedback").style.color = "red";
         incorrectCount++;
