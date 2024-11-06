@@ -76,7 +76,75 @@ function checkAnswer() {
     }
 }
 
-// Function to show the solution walkthrough
+// Function to show the submission form and keep it visible
+function showSubmissionForm() {
+    const formHtml = `
+        <div id="submissionForm">
+            <h3>Submit Your Work</h3>
+            <label for="name">Name:</label>
+            <input type="text" id="name" placeholder="First and Last Name" required>
+            <label for="classHour">Hour:</label>
+            <select id="classHour" required>
+                <option value="">Select Hour</option>
+                <option value="4th">1</option>
+                <option value="5th">2</option>
+                <option value="7th">3</option>
+            </select>
+            <button onclick="submitForm()">Submit</button>
+            <button onclick="closeSubmissionForm()">Cancel</button>
+        </div>
+    `;
+    document.getElementById("feedback").innerHTML = formHtml;
+}
+
+// Function to close the submission form
+function closeSubmissionForm() {
+    document.getElementById("feedback").innerText = '';
+}
+
+// Function to submit the form data to Google Sheets
+function submitForm() {
+    const name = document.getElementById("name").value;
+    const classHour = document.getElementById("classHour").value;
+
+    sendDataToGoogleSheet(name, classHour);
+
+    correctCount = 0;
+    incorrectCount = 0;
+    updateTally();
+    closeSubmissionForm();
+}
+
+// Function to send data to Google Sheets
+function sendDataToGoogleSheet(name, classHour) {
+    const scriptURL = 'https://script.google.com/macros/s/AKfycby_JP5OxqR_zmQrtgE3t2glH95Dc0rUtgzc25d7TQgXEUWOzqCPyxiZAaB9BZdAJhAw/exec';
+    const data = new FormData();
+    data.append('name', name);
+    data.append('classHour', classHour);
+
+    fetch(scriptURL, {
+        method: 'POST',
+        body: data
+    })
+    .then(response => {
+        if (response.ok) {
+            alert('Submission successful! Thank you for submitting your work.');
+        } else {
+            alert('There was a problem with the submission. Please try again.');
+        }
+    })
+    .catch(error => {
+        alert('Error: ' + error.message);
+    });
+}
+
+// Function to update the tally bar display
+function updateTally() {
+    document.getElementById("correct-tally").innerText = `✅: ${correctCount}`;
+    document.getElementById("incorrect-tally").innerText = `❌: ${incorrectCount}`;
+}
+
+// Solution walkthrough function
 function showSolutionWalkthrough() {
     const answerInput = document.getElementById("answer-input");
     const problemType = parseInt(answerInput.dataset.problemType);
@@ -104,3 +172,11 @@ function showSolutionWalkthrough() {
 function roundToHundredth(num) {
     return Math.round(num * 100) / 100;
 }
+
+// Event listener to submit answer on pressing Enter key
+document.getElementById("answer-input").addEventListener("keypress", function(event) {
+    if (event.key === "Enter") {
+        event.preventDefault(); // Prevent default Enter behavior
+        checkAnswer(); // Trigger the answer check
+    }
+});
